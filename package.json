@@ -12,17 +12,23 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare",
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write",
+    "pretty": "pretty-quick"
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.1",
     "@types/chrome": "^0.0.280",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
     "@wxt-dev/module-react": "^1.1.2",
+    "prettier": "^3.4.2",
+    "pretty-quick": "^4.0.0",
     "typescript": "^5.6.3",
     "wxt": "^0.19.13"
   }
