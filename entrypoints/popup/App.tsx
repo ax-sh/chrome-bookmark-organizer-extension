@@ -3,7 +3,6 @@ import BookmarksTable from '@/components/bookmarks-table';
 import { BM, readBookmarks } from '@/entrypoints/utils';
 import { useEffect, useState } from 'react';
 
-import './App.css';
 import wxtLogo from '/wxt.svg';
 
 function App() {
@@ -19,7 +18,8 @@ function App() {
   }, []);
 
   return (
-    <div className='bg-red-500 w-full'>
+    <div className='text-black w-full'>
+      <img src={wxtLogo} className='w-32' />
       <BookmarksTable data={bookmarks} />
     </div>
   );
