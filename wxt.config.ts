@@ -17,7 +17,7 @@ export default defineConfig({
     // chromiumArgs: ['--user-data-dir=./.wxt/chrome-data'],
     openDevtools: true,
     openConsole: true,
-    disabled: true,
+    // disabled: true,s
     binaries: {
       // chrome: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
       chrome: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
