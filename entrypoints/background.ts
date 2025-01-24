@@ -3,10 +3,11 @@ import { traverseBookmarks } from './utils';
 async function readBookmarks() {
   const bookmarks = await chrome.bookmarks.getTree();
   const allUrls = bookmarks.flatMap((node) => traverseBookmarks(node));
-  console.log('All bookmark URLs:', allUrls);
+  console.log('All bookmark URLs:');
+  console.table(allUrls)
 
   chrome.bookmarks.onChanged.addListener(() => {
-    console.log('Bookmarks changed');
+    console.log('Bookmarks changed - re-reading...');
   });
 
   return allUrls;
