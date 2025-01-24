@@ -19,7 +19,7 @@ function App() {
   }, [searchTerm]);
 
   return (
-    <div className='text-black w-full '>
+    <div className='text-black w-full min-w-[600px]'>
       <section className='flex items-center justify-between p-4'>
         <img alt='' src={wxtLogo} className='w-12' />
         <img alt='' src={reactLogo} className='w-12' />
@@ -28,6 +28,7 @@ function App() {
       <div className='flex flex-col p-4'>
         <input
           type='search'
+          value={searchTerm}
           placeholder='Search bookmarks by domain...'
           className='p-2 border border-gray-300 rounded text-white bg-[#111] '
           onChange={(e) => setSearchTerm(e.target.value)}

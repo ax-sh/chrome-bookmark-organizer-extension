@@ -35,7 +35,7 @@ const BookmarksTable = ({ data }: { data: BM[] }) => {
   });
 
   return (
-    <table className='min-w-full divide-y divide-gray-200'>
+    <table className='w-full divide-y divide-gray-200'>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
