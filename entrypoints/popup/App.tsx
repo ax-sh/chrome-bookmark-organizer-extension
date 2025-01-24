@@ -1,6 +1,6 @@
 import reactLogo from '@/assets/react.svg';
 import BookmarksTable from '@/components/bookmarks-table';
-import { BM, readBookmarks } from '@/entrypoints/utils';
+import { BM, fetchFilteredBookmarks } from '@/entrypoints/utils';
 import { useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
@@ -11,23 +11,7 @@ function App() {
 
   useEffect(() => {
     const fetchBookmarks = async () => {
-      const allUrls = await readBookmarks();
-      // This filtering logic may not be working as expected
-      // Possible reasons:
-      // 1. 'location.origin' might not be available or correct in the extension context
-      // 2. The URL constructor might throw an error for invalid URLs
-      // 3. The filter condition might be too strict
-      // Consider logging 'allUrls' and 'location.origin' for debugging
-      console.log('All URLs:', allUrls);
-
-      const filtered = allUrls.filter((i) => {
-        try {
-          return i.url && new URL(i.url).origin.includes('amazon');
-        } catch (error) {
-          console.error('Error parsing URL:', i.url, error);
-          return false;
-        }
-      });
+      const filtered = await fetchFilteredBookmarks('hoto');
       console.log('Filtered URLs:', filtered);
       setBookmarks(filtered);
     };

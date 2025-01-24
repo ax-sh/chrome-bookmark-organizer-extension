@@ -22,4 +22,18 @@ export async function readBookmarks() {
 
   return allUrls;
 }
-export default { traverseBookmarks, readBookmarks };
+
+export async function fetchFilteredBookmarks(domain: string) {
+  const allUrls = await readBookmarks();
+  // console.log('All URLs:', allUrls);
+  const filtered = allUrls.filter((i) => {
+    try {
+      return i.url && new URL(i.url).origin.includes(domain);
+    } catch (error) {
+      console.error('Error parsing URL:', i.url, error);
+      return false;
+    }
+  });
+  return filtered;
+}
+export default { traverseBookmarks, readBookmarks, fetchFilteredBookmarks };
