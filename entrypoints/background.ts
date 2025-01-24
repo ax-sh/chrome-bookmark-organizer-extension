@@ -4,7 +4,7 @@ async function readBookmarks() {
   const bookmarks = await chrome.bookmarks.getTree();
   const allUrls = bookmarks.flatMap((node) => traverseBookmarks(node));
   console.log('All bookmark URLs:');
-  console.table(allUrls)
+  console.table(allUrls);
 
   chrome.bookmarks.onChanged.addListener(() => {
     console.log('Bookmarks changed - re-reading...');
@@ -15,5 +15,6 @@ async function readBookmarks() {
 
 export default defineBackground(async () => {
   console.log('Hello background!', { id: browser.runtime.id });
+
   await readBookmarks();
 });
