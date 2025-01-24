@@ -1,15 +1,25 @@
 import reactLogo from '@/assets/react.svg';
-import { useState } from 'react';
+import { BM, readBookmarks } from '@/entrypoints/utils';
+import { useEffect, useState } from 'react';
 
 import './App.css';
 import wxtLogo from '/wxt.svg';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [bookmarks, setBookmarks] = useState<BM[]>([]);
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      const allUrls = await readBookmarks();
+      setBookmarks(allUrls);
+    };
+    fetchBookmarks();
+  }, []);
 
   return (
     <>
-      <div>
+      <div className='bg-red-500 w-full'>
         <a href='https://wxt.dev' target='_blank'>
           <img src={wxtLogo} className='logo' alt='WXT logo' />
         </a>
@@ -24,7 +34,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className='read-the-docs'>Click on the WXT and React logos to learn more</p>
+      {/* <pre>{JSON.stringify(bookmarks, null, 2)}</pre> */}
     </>
   );
 }

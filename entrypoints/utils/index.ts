@@ -4,7 +4,7 @@ export function traverseBookmarks(node: chrome.bookmarks.BookmarkTreeNode): BM[]
   let urls: BM[] = [];
 
   if (node.url) {
-    urls.push({ url: node.url, id: node.id , title: node.title});
+    urls.push({ url: node.url, id: node.id, title: node.title });
   }
 
   if (node.children) {
@@ -15,4 +15,11 @@ export function traverseBookmarks(node: chrome.bookmarks.BookmarkTreeNode): BM[]
 
   return urls;
 }
-export default { traverseBookmarks };
+
+export async function readBookmarks() {
+  const bookmarks = await chrome.bookmarks.getTree();
+  const allUrls = bookmarks.flatMap((node) => traverseBookmarks(node));
+
+  return allUrls;
+}
+export default { traverseBookmarks, readBookmarks };
