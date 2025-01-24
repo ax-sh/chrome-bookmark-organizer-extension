@@ -18,8 +18,10 @@
     "pretty": "pretty-quick"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.1",
