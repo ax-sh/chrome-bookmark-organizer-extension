@@ -12,14 +12,33 @@ function App() {
   useEffect(() => {
     const fetchBookmarks = async () => {
       const allUrls = await readBookmarks();
-      setBookmarks(allUrls);
+      // This filtering logic may not be working as expected
+      // Possible reasons:
+      // 1. 'location.origin' might not be available or correct in the extension context
+      // 2. The URL constructor might throw an error for invalid URLs
+      // 3. The filter condition might be too strict
+      // Consider logging 'allUrls' and 'location.origin' for debugging
+      console.log('All URLs:', allUrls);
+
+      const filtered = allUrls.filter((i) => {
+        try {
+          return i.url && new URL(i.url).origin.includes('amazon');
+        } catch (error) {
+          console.error('Error parsing URL:', i.url, error);
+          return false;
+        }
+      });
+      console.log('Filtered URLs:', filtered);
+      setBookmarks(filtered);
     };
     fetchBookmarks();
   }, []);
 
   return (
     <div className='text-black w-full'>
-      <img src={wxtLogo} className='w-32' />
+      <img src={wxtLogo} className='w-12' />
+      <h1 className='text-3xl'>{bookmarks.length}</h1>
+
       <BookmarksTable data={bookmarks} />
     </div>
   );
