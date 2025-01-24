@@ -10,7 +10,11 @@ const columnHelper = createColumnHelper<BM>();
 
 const columns = [
   columnHelper.accessor('title', {
-    cell: (info) => info.getValue(),
+    cell: (info) => (
+      <a href={info.cell.row.original.url} target='_blank' rel='noopener noreferrer'>
+        {info.getValue()}
+      </a>
+    ),
     header: () => <span>Title</span>,
   }),
   columnHelper.accessor('url', {
