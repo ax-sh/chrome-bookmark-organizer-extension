@@ -7,4 +7,13 @@ export default defineConfig({
   manifest: {
     permissions: ['bookmarks'],
   },
+  runner: {
+    // chromiumArgs: ['--user-data-dir=./.wxt/chrome-data'],
+    openDevtools: true,
+    openConsole: true,
+    binaries: {
+      // chrome: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+      chrome: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    },
+  },
 });
