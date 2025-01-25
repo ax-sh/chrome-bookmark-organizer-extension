@@ -3,15 +3,15 @@ import { BM } from '@/entrypoints/utils';
 import { useEffect } from 'react';
 
 export function ShowBookmarkBadges({ bookmark }: { bookmark: BM }) {
-  const [parent, setParent] = useState<string>();
+  const [parent, setParent] = useState<string>('');
   useEffect(() => {
-    chrome.bookmarks.get(bookmark.parentId!).then(([i]) => {
-      setParent(i.title!);
+    chrome.bookmarks.get(bookmark.parentId!).then(([{ title }]) => {
+      setParent(title ?? '');
     });
   }, [bookmark]);
 
   return (
-    <Badge className={'text-xs whitespace-nowrap'} variant='secondary'>
+    <Badge className={'text-[0.5rem] whitespace-nowrap'} variant='secondary'>
       {parent}
     </Badge>
   );

@@ -1,4 +1,5 @@
 import { DeleteBookmarkConfirmationDialogWith } from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
+import { ElapsedTime } from '@/components/bookmarks/elapsed-time.tsx';
 import { ShowBookmarkBadges } from '@/components/bookmarks/show-bookmark-badges.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import {
@@ -25,7 +26,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
-import { DateTime } from 'luxon';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -88,44 +88,47 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
 
 export const columns: ColumnDef<BM>[] = [
   {
-    accessorKey: 'dateAdded',
-    cell: (info) => {
-      const unix = info.getValue<number>();
-      const pastTime = DateTime.fromMillis(unix);
-      const now = DateTime.now();
-      const elapsed = now.diff(pastTime, ['years', 'days', 'hours', 'minutes', 'seconds']);
-      return (
-        <time className={'text-xs'} title={`[${unix}]`}>
-          {elapsed.toHuman()}
-        </time>
-      );
-    },
-
-    header: () => <span>Time</span>,
-  },
-  {
-    accessorKey: 'url',
-    cell: ({ row, getValue }) => (
-      <a
-        title={getValue<string>()}
-        className='block w-100 overflow-hidden text-ellipsis'
-        href={getValue<string>()}
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        {row.getValue<string>('url')}
-      </a>
-    ),
-
-    header: () => <div>Title</div>,
-  },
-  {
     id: 'tags',
     enableHiding: false,
     cell: ({ row }) => {
       const bookmark = row.original;
       return <ShowBookmarkBadges bookmark={bookmark} />;
     },
+  },
+  {
+    accessorKey: 'dateAdded',
+    header: () => <span>Time</span>,
+    cell: (info) => {
+      const unix = info.getValue<number>();
+      return <ElapsedTime unix={unix} />;
+    },
+  },
+  // {
+  //   accessorKey: 'title',
+  //   enableHiding: true,
+  // },
+  {
+    accessorKey: 'url',
+    cell: ({ row, getValue }) => {
+      const bookmark = row.original;
+      const unix = row.getValue<number>('dateAdded'); //only works if its defined in this column
+      return (
+        <>
+          <ElapsedTime unix={unix} />;
+          <a
+            title={bookmark.title}
+            className='block w-100 overflow-hidden text-ellipsis'
+            href={getValue<string>()}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {getValue<string>()}
+          </a>
+        </>
+      );
+    },
+
+    header: () => <div>Title</div>,
   },
   {
     id: 'actions',
