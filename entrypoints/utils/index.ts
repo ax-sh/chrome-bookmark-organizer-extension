@@ -1,10 +1,10 @@
-export type BM = Pick<chrome.bookmarks.BookmarkTreeNode, 'id' | 'url' | 'title'>;
+export type BM = Pick<chrome.bookmarks.BookmarkTreeNode, 'id' | 'url' | 'title' | 'dateAdded'>;
 
 export function traverseBookmarks(node: chrome.bookmarks.BookmarkTreeNode): BM[] {
   let urls: BM[] = [];
 
   if (node.url) {
-    urls.push({ url: node.url, id: node.id, title: node.title });
+    urls.push({ url: node.url, id: node.id, title: node.title, dateAdded: node.dateAdded });
   }
 
   if (node.children) {
