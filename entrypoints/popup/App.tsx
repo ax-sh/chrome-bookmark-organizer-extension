@@ -7,15 +7,13 @@ import wxtLogo from '/wxt.svg';
 
 function App() {
   const [bookmarks, setBookmarks] = useState<BM[]>([]);
-  const [searchTerm, setSearchTerm] = useState('hoto');
+  const [searchTerm, setSearchTerm] = useState('amazon');
 
   useEffect(() => {
-    const fetchBookmarks = async () => {
-      const filtered = await fetchFilteredBookmarks(searchTerm);
+    fetchFilteredBookmarks(searchTerm).then((filtered) => {
       console.log('Filtered URLs:', filtered);
       setBookmarks(filtered);
-    };
-    fetchBookmarks();
+    });
   }, [searchTerm]);
 
   return (
