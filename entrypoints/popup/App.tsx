@@ -1,7 +1,7 @@
 import reactLogo from '@/assets/react.svg';
 import BookmarksTable from '@/components/bookmarks-table';
 import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
-import { useEffect, useState } from 'react';
+import { ComponentRef, useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
 
@@ -11,8 +11,13 @@ interface SearchInputProps {
 }
 
 function SearchInput({ value, onChange }: SearchInputProps) {
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
   return (
     <input
+      ref={ref}
       type='search'
       value={value}
       placeholder='Search bookmarks by domain...'
