@@ -12,7 +12,7 @@ function SearchInput(props: { value: string; onChange: (e: string) => void }) {
       value={props.value}
       placeholder='Search bookmarks by domain...'
       className='p-2 border border-gray-300 rounded text-white bg-[#111] '
-      onChange={props.onChange}
+      onChange={(e) => props.onChange(e.target.value)}
     />
   );
 }
