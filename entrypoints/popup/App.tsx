@@ -50,11 +50,15 @@ function App() {
 
       {/* <BookmarksTable data={bookmarks} /> */}
       <pre>
-        {Object.entries(groupedBookmarks).map(([key, value]) => {
+        {Object.entries(groupedBookmarks).map(([domain, value]) => {
           return (
-            <div key={key} className='prose'>
-              <h3>{key}</h3>
-              <h4 className='text-white'>{value.length}</h4>
+            <div key={domain} className='prose  py-8'>
+              <div className='bg-white prose'>
+                <h3 className='text-xl text-black px-4'>
+                  {domain} [{value.length}]
+                </h3>
+              </div>
+
               <BookmarksTable data={value} />
             </div>
           );
