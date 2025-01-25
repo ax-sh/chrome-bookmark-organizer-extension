@@ -25,6 +25,8 @@ export async function readBookmarks() {
 
 export async function fetchFilteredBookmarks(domain: string) {
   const allUrls = await readBookmarks();
+
+  if (!domain) return allUrls;
   // console.log('All URLs:', allUrls);
   const filtered = allUrls.filter((i) => {
     try {
@@ -36,4 +38,21 @@ export async function fetchFilteredBookmarks(domain: string) {
   });
   return filtered;
 }
-export default { traverseBookmarks, readBookmarks, fetchFilteredBookmarks };
+
+export function runGroupByDomain(allUrls: BM[]) {
+  const groupedByDomain = allUrls.reduce(
+    (acc, bookmark) => {
+      try {
+        const domain = new URL(bookmark.url!).hostname;
+        if (!acc[domain]) acc[domain] = [];
+        acc[domain].push(bookmark);
+      } catch (error) {
+        console.error('Error parsing URL:', bookmark.url, error);
+      }
+      return acc;
+    },
+    {} as Record<string, BM[]>
+  );
+  return groupedByDomain;
+}
+export default { traverseBookmarks, readBookmarks, fetchFilteredBookmarks, runGroupByDomain };
