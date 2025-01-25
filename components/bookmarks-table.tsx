@@ -31,11 +31,15 @@ const columns = [
       const unix = info.getValue<number>();
       const pastTime = DateTime.fromMillis(unix);
       const now = DateTime.now();
-      const elapsed = now.diff(pastTime, ['days', 'hours', 'minutes', 'seconds']);
-      return <time title={`[${unix}]`}>{elapsed.toHuman()}</time>;
+      const elapsed = now.diff(pastTime, ['years', 'days', 'hours', 'minutes', 'seconds']);
+      return (
+        <time className={'text-xs'} title={`[${unix}]`}>
+          {elapsed.toHuman()}
+        </time>
+      );
     },
 
-    header: () => <span>URL</span>,
+    header: () => <span>Time</span>,
   }),
 ];
 
