@@ -1,5 +1,6 @@
 import reactLogo from '@/assets/react.svg';
 import BookmarksTable from '@/components/bookmarks-table';
+import BookmarksDataTableImpl, { BookmarksDataTable } from '@/components/bookmarks/data-table';
 import { Button } from '@/components/ui/button.tsx';
 import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
 import { useEffect, useState } from 'react';
@@ -57,17 +58,16 @@ function App() {
         <SearchInput value={searchTerm} onChange={setSearchTerm} />
       </div>
 
-      {/* <BookmarksTable data={bookmarks} /> */}
-
-      {Object.entries(groupedBookmarks).map(([domain, value]) => {
+      {Object.entries(groupedBookmarks).map(([domain, bookmarks]) => {
         return (
           <article key={domain} className='prose w-[700px] py-8'>
             <details>
               <summary className='bg-white prose text-xl text-black p-2 cursor-pointer'>
-                [{value.length}] {domain}
+                [{bookmarks.length}] {domain}
               </summary>
               <div className='prose bg-white overflow-hidden'>
-                <BookmarksTable data={value} />
+                {/*<BookmarksTable data={bookmarks} />*/}
+                <BookmarksDataTableImpl data={bookmarks} />
               </div>
             </details>
           </article>
