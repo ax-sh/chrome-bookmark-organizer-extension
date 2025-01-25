@@ -1,14 +1,5 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog.tsx';
+import { DeleteBookmarkConfirmationDialog } from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
+import { AlertDialogAction, AlertDialogCancel } from '@/components/ui/alert-dialog.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import {
   DropdownMenu,
@@ -154,34 +145,17 @@ export const columns: ColumnDef<BM>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             {/*<DropdownMenuItem>View details</DropdownMenuItem>*/}
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <DropdownMenuItem
-                  className='cursor-pointer text-red-600 focus:bg-red-100'
-                  onSelect={(e) => e.preventDefault()}
-                >
-                  Delete bookmark
-                </DropdownMenuItem>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete the bookmark.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      /* Add delete logic here */
-                    }}
-                  >
-                    Delete
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <DeleteBookmarkConfirmationDialog>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                className={'bg-red-500 cursor-pointer'}
+                onClick={() => {
+                  /* Add delete logic here */
+                }}
+              >
+                Delete
+              </AlertDialogAction>
+            </DeleteBookmarkConfirmationDialog>
           </DropdownMenuContent>
         </DropdownMenu>
       );
