@@ -44,6 +44,23 @@ const compareValues = <T>(
 //     order: 'asc' | 'desc'
 // ) => (a: BM, b: BM) => compareValues(a[field], b[field], order);
 
+// Solution 2: Strict Type Checking
+
+// const sortByField = <T extends keyof BM>(
+//     field: T,
+//     order: 'asc' | 'desc',
+//     fallback: NonNullable<BM[T]> // Fallback value to use when undefined
+// ) => (a: BM, b: BM) => {
+//   const aValue = a[field] ?? fallback;
+//   const bValue = b[field] ?? fallback;
+//
+//   const direction = order === 'desc' ? -1 : 1;
+//
+//   if (aValue > bValue) return direction;
+//   if (aValue < bValue) return -direction;
+//   return 0;
+// };
+
 export async function fetchFilteredBookmarks(domain: string) {
   const allUrls = await readBookmarks();
 
