@@ -1,8 +1,9 @@
 import reactLogo from '@/assets/react.svg';
 import BookmarksDataTable from '@/components/bookmarks/data-table.tsx';
 import { Button } from '@/components/ui/button.tsx';
+import { Input } from '@/components/ui/input';
 import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
 
@@ -17,13 +18,12 @@ function SearchInput({ value, onChange }: SearchInputProps) {
     ref.current?.focus();
   }, []);
   return (
-    <input
-      ref={ref}
+    <Input
       type='search'
-      value={value}
       placeholder='Search bookmarks by domain...'
-      className='p-2 border border-gray-300 rounded text-white bg-[#111]'
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+      ref={ref}
+      value={value}
+      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
     />
   );
 }
