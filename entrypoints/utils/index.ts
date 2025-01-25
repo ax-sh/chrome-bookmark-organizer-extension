@@ -47,7 +47,7 @@ export function groupUrlsByDomain(allUrls: BM[]) {
   };
 
   const sortedUrls = allUrls.toSorted(sortByField('dateAdded', 'asc'));
-  return Object.groupBy(sortedUrls, (bookmark) => {
+  const grouped = Object.groupBy(sortedUrls, (bookmark) => {
     try {
       const domain = new URL(bookmark.url!).hostname;
       return domain;
@@ -56,6 +56,10 @@ export function groupUrlsByDomain(allUrls: BM[]) {
       return '';
     }
   }) as Record<string, BM[]>;
+  
+  return Object.fromEntries(
+    Object.entries(grouped).sort(([, a], [, b]) => b.length - a.length)
+  );
   // const groupedByDomain = allUrls.reduce(
   //   (acc, bookmark) => {
   //     try {
