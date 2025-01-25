@@ -37,7 +37,7 @@ export function DeleteBookmarkConfirmationDialog({ children }: PropsWithChildren
   );
 }
 
-export function DeleteBookmarkConfirmationDialogWith({ bookmark }: { bookmark: BM }) {
+export function DeleteBookmarkConfirmationDialogWithAction({ bookmark }: { bookmark: BM }) {
   return (
     <DeleteBookmarkConfirmationDialog>
       <AlertDialogCancel>Cancel</AlertDialogCancel>

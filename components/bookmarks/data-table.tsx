@@ -1,4 +1,4 @@
-import { DeleteBookmarkConfirmationDialogWith } from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
+import { DeleteBookmarkConfirmationDialogWithAction } from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
 import { ElapsedTime } from '@/components/bookmarks/elapsed-time.tsx';
 import { ShowBookmarkBadges } from '@/components/bookmarks/show-bookmark-badges.tsx';
 import { Button } from '@/components/ui/button.tsx';
@@ -156,7 +156,7 @@ export const columns: ColumnDef<BM>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             {/*<DropdownMenuItem>View details</DropdownMenuItem>*/}
-            <DeleteBookmarkConfirmationDialogWith bookmark={bookmark} />
+            <DeleteBookmarkConfirmationDialogWithAction bookmark={bookmark} />
           </DropdownMenuContent>
         </DropdownMenu>
       );
