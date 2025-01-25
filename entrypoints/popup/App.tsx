@@ -5,6 +5,18 @@ import { useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
 
+function SearchInput(props: { value: string; onChange: (e) => void }) {
+  return (
+    <input
+      type='search'
+      value={props.value}
+      placeholder='Search bookmarks by domain...'
+      className='p-2 border border-gray-300 rounded text-white bg-[#111] '
+      onChange={props.onChange}
+    />
+  );
+}
+
 function App() {
   const [bookmarks, setBookmarks] = useState<BM[]>([]);
   const [searchTerm, setSearchTerm] = useState('amazon');
@@ -24,13 +36,7 @@ function App() {
         <h1 className='text-3xl text-white'>{bookmarks.length}</h1>
       </section>
       <div className='flex flex-col p-4'>
-        <input
-          type='search'
-          value={searchTerm}
-          placeholder='Search bookmarks by domain...'
-          className='p-2 border border-gray-300 rounded text-white bg-[#111] '
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <SearchInput value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
       </div>
 
       <BookmarksTable data={bookmarks} />
