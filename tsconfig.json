@@ -1,6 +1,12 @@
 {
   "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
+    //    alias required by shadcn
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    //     alias required by shadcn
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx"
   }
