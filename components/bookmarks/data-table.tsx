@@ -23,6 +23,7 @@ import {
   SortingState,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
@@ -39,6 +40,7 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
     columns,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     state: {
       sorting,
     },
@@ -122,7 +124,7 @@ export const columns: ColumnDef<BM>[] = [
             target='_blank'
             rel='noopener noreferrer'
           >
-            {getValue<string>()}
+            {bookmark.title.trim() ?? getValue<string>()}
           </a>
         </>
       );
