@@ -7,7 +7,7 @@ export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: ({ browser, manifestVersion, mode, command }) => {
     const config: UserManifest = {
-      permissions: ['bookmarks'],
+      permissions: ['bookmarks', 'storage', 'tabs'],
     };
     console.log('Manifest>>>', { browser, manifestVersion, mode, command });
     console.log('manifest config>>>', config);

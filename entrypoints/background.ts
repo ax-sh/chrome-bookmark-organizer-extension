@@ -7,9 +7,9 @@ export default defineBackground(async () => {
 
   console.table(allUrls);
 
-  // chrome.bookmarks.onChanged.addListener(() => {
-  //   console.log('Bookmarks changed - re-reading...');
-  // });
+  chrome.bookmarks.onChanged.addListener(() => {
+    console.log('Bookmarks changed - re-reading...');
+  });
 
   const groupedByDomain = groupUrlsByDomain(allUrls);
   console.log('Grouped by domain:', groupedByDomain);
