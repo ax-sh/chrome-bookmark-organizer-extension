@@ -5,14 +5,19 @@ import { useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
 
-function SearchInput(props: { value: string; onChange: (e: string) => void }) {
+interface SearchInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+function SearchInput({ value, onChange }: SearchInputProps) {
   return (
     <input
       type='search'
-      value={props.value}
+      value={value}
       placeholder='Search bookmarks by domain...'
-      className='p-2 border border-gray-300 rounded text-white bg-[#111] '
-      onChange={(e) => props.onChange(e.target.value)}
+      className='p-2 border border-gray-300 rounded text-white bg-[#111]'
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
     />
   );
 }
@@ -36,7 +41,7 @@ function App() {
         <h1 className='text-3xl text-white'>{bookmarks.length}</h1>
       </section>
       <div className='flex flex-col p-4'>
-        <SearchInput value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        <SearchInput value={searchTerm} onChange={setSearchTerm} />
       </div>
 
       <BookmarksTable data={bookmarks} />
