@@ -3,6 +3,7 @@ import {
   DeleteBookmarkConfirmationDialogWith,
 } from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
 import { AlertDialogAction, AlertDialogCancel } from '@/components/ui/alert-dialog.tsx';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button.tsx';
 import {
   DropdownMenu,
@@ -121,6 +122,14 @@ export const columns: ColumnDef<BM>[] = [
     ),
 
     header: () => <div>Title</div>,
+  },
+  {
+    id: 'tags',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const bookmark = row.original;
+      return <Badge variant='secondary'>{bookmark.tag}</Badge>;
+    },
   },
   {
     id: 'actions',
