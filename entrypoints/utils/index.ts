@@ -23,6 +23,27 @@ export async function readBookmarks() {
   return allUrls;
 }
 
+const compareValues = <T>(
+  a: T | null | undefined,
+  b: T | null | undefined,
+  order: 'asc' | 'desc'
+) => {
+  const direction = order === 'desc' ? -1 : 1;
+
+  // Handle nullish values
+  if (a == null && b == null) return 0;
+  if (a == null) return -direction;
+  if (b == null) return direction;
+
+  if (a > b) return direction;
+  if (a < b) return -direction;
+  return 0;
+};
+// const sortByField = <T extends keyof BM>(
+//     field: T,
+//     order: 'asc' | 'desc'
+// ) => (a: BM, b: BM) => compareValues(a[field], b[field], order);
+
 export async function fetchFilteredBookmarks(domain: string) {
   const allUrls = await readBookmarks();
 
@@ -40,11 +61,13 @@ export async function fetchFilteredBookmarks(domain: string) {
 }
 
 export function groupUrlsByDomain(allUrls: BM[]) {
-  const sortByField = <T extends keyof BM>(field: T, order: 'asc' | 'desc') => (a: BM, b: BM) => {
-    const aValue = a[field] ?? 0;
-    const bValue = b[field] ?? 0;
-    return order === 'desc' ? Number(bValue) - Number(aValue) : Number(aValue) - Number(bValue);
-  };
+  const sortByField =
+    <T extends keyof BM>(field: T, order: 'asc' | 'desc') =>
+    (a: BM, b: BM) => {
+      const aValue = a[field] ?? 0;
+      const bValue = b[field] ?? 0;
+      return order === 'desc' ? Number(bValue) - Number(aValue) : Number(aValue) - Number(bValue);
+    };
 
   const sortedUrls = allUrls.toSorted(sortByField('dateAdded', 'asc'));
   const grouped = Object.groupBy(sortedUrls, (bookmark) => {
@@ -56,10 +79,8 @@ export function groupUrlsByDomain(allUrls: BM[]) {
       return '';
     }
   }) as Record<string, BM[]>;
-  
-  return Object.fromEntries(
-    Object.entries(grouped).sort(([, a], [, b]) => b.length - a.length)
-  );
+
+  return Object.fromEntries(Object.entries(grouped).sort(([, a], [, b]) => b.length - a.length));
   // const groupedByDomain = allUrls.reduce(
   //   (acc, bookmark) => {
   //     try {
