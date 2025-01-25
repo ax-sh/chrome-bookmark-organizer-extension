@@ -1,5 +1,6 @@
 import reactLogo from '@/assets/react.svg';
 import BookmarksTable from '@/components/bookmarks-table';
+import { Button } from '@/components/ui/button.tsx';
 import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
 import { ComponentRef, useEffect, useState } from 'react';
 
@@ -47,6 +48,9 @@ function App() {
       <section className='flex items-center justify-between p-4'>
         <img alt='' src={wxtLogo} className='w-12' />
         <img alt='' src={reactLogo} className='w-12' />
+        <Button variant='outline' className='rounded'>
+          Button
+        </Button>
         <h1 className='text-3xl text-white'>{bookmarks.length}</h1>
       </section>
       <div className='flex flex-col p-4'>
