@@ -1,6 +1,6 @@
 import reactLogo from '@/assets/react.svg';
 import BookmarksTable from '@/components/bookmarks-table';
-import { type BM, fetchFilteredBookmarks } from '@/entrypoints/utils';
+import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
 import { useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
@@ -25,10 +25,14 @@ function SearchInput({ value, onChange }: SearchInputProps) {
 function App() {
   const [bookmarks, setBookmarks] = useState<BM[]>([]);
   const [searchTerm, setSearchTerm] = useState('amazon');
+  const [groupedBookmarks, setGroupedBookmarks] = useState<{ [key: string]: BM[] }>({});
 
   useEffect(() => {
     fetchFilteredBookmarks(searchTerm).then((filtered) => {
       console.log('Filtered URLs:', filtered);
+      const grouped = groupUrlsByDomain(filtered);
+      setGroupedBookmarks(grouped);
+
       setBookmarks(filtered);
     });
   }, [searchTerm]);
@@ -44,7 +48,18 @@ function App() {
         <SearchInput value={searchTerm} onChange={setSearchTerm} />
       </div>
 
-      <BookmarksTable data={bookmarks} />
+      {/* <BookmarksTable data={bookmarks} /> */}
+      <pre>
+        {Object.entries(groupedBookmarks).map(([key, value]) => {
+          return (
+            <div key={key} className='prose'>
+              <h3>{key}</h3>
+              <h4 className='text-white'>{value.length}</h4>
+              <BookmarksTable data={value} />
+            </div>
+          );
+        })}
+      </pre>
     </div>
   );
 }

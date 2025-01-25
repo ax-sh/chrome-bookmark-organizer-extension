@@ -1,4 +1,4 @@
-import { readBookmarks, runGroupByDomain } from './utils';
+import { groupUrlsByDomain, readBookmarks } from './utils';
 
 export default defineBackground(async () => {
   console.log('w Hello background!', { id: browser.runtime.id });
@@ -11,6 +11,6 @@ export default defineBackground(async () => {
   //   console.log('Bookmarks changed - re-reading...');
   // });
 
-  const groupedByDomain = runGroupByDomain(allUrls);
+  const groupedByDomain = groupUrlsByDomain(allUrls);
   console.log('Grouped by domain:', groupedByDomain);
 });

@@ -39,7 +39,7 @@ export async function fetchFilteredBookmarks(domain: string) {
   return filtered;
 }
 
-export function runGroupByDomain(allUrls: BM[]) {
+export function groupUrlsByDomain(allUrls: BM[]) {
   const groupedByDomain = allUrls.reduce(
     (acc, bookmark) => {
       try {
@@ -55,4 +55,4 @@ export function runGroupByDomain(allUrls: BM[]) {
   );
   return groupedByDomain;
 }
-export default { traverseBookmarks, readBookmarks, fetchFilteredBookmarks, runGroupByDomain };
+export default { traverseBookmarks, readBookmarks, fetchFilteredBookmarks, groupUrlsByDomain };
