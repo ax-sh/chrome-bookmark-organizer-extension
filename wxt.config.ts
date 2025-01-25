@@ -5,12 +5,12 @@ import { type UserManifest, defineConfig } from 'wxt';
 export default defineConfig({
   extensionApi: 'chrome',
   modules: ['@wxt-dev/module-react'],
-  manifest: ({ browser }) => {
+  manifest: ({ browser, manifestVersion, mode, command }) => {
     const config: UserManifest = {
       permissions: ['bookmarks'],
     };
-    console.log(browser, '<Manifest');
-    console.log(config);
+    console.log('Manifest>>>', { browser, manifestVersion, mode, command });
+    console.log('manifest config>>>', config);
     return config;
   },
   vite: () => ({
