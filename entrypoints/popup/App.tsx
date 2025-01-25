@@ -1,6 +1,5 @@
 import reactLogo from '@/assets/react.svg';
-import BookmarksTable from '@/components/bookmarks-table';
-import BookmarksDataTableImpl, { BookmarksDataTable } from '@/components/bookmarks/data-table';
+import BookmarksDataTable from '@/components/bookmarks/data-table.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
 import { useEffect, useState } from 'react';
@@ -66,8 +65,7 @@ function App() {
                 [{bookmarks.length}] {domain}
               </summary>
               <div className='prose bg-white overflow-hidden'>
-                {/*<BookmarksTable data={bookmarks} />*/}
-                <BookmarksDataTableImpl data={bookmarks} />
+                <BookmarksDataTable data={bookmarks} />
               </div>
             </details>
           </article>
