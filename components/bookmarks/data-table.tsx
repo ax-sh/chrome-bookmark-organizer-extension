@@ -1,4 +1,7 @@
-import { DeleteBookmarkConfirmationDialog } from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
+import {
+  DeleteBookmarkConfirmationDialog,
+  DeleteBookmarkConfirmationDialogWith,
+} from '@/components/bookmarks/delete-bookmark-confirmation-dialog.tsx';
 import { AlertDialogAction, AlertDialogCancel } from '@/components/ui/alert-dialog.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import {
@@ -145,17 +148,7 @@ export const columns: ColumnDef<BM>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             {/*<DropdownMenuItem>View details</DropdownMenuItem>*/}
-            <DeleteBookmarkConfirmationDialog>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                className={'bg-red-500 cursor-pointer'}
-                onClick={() => {
-                  /* Add delete logic here */
-                }}
-              >
-                Delete
-              </AlertDialogAction>
-            </DeleteBookmarkConfirmationDialog>
+            <DeleteBookmarkConfirmationDialogWith bookmark={bookmark} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

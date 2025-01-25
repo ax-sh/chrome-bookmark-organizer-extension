@@ -1,5 +1,7 @@
 import {
   AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -8,6 +10,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog.tsx';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu.tsx';
+import { BM } from '@/entrypoints/utils';
 import { PropsWithChildren } from 'react';
 
 export function DeleteBookmarkConfirmationDialog({ children }: PropsWithChildren) {
@@ -31,5 +34,22 @@ export function DeleteBookmarkConfirmationDialog({ children }: PropsWithChildren
         <AlertDialogFooter>{children}</AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+  );
+}
+
+export function DeleteBookmarkConfirmationDialogWith({ bookmark }: { bookmark: BM }) {
+  return (
+    <DeleteBookmarkConfirmationDialog>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction
+        className={'bg-red-500 cursor-pointer'}
+        onClick={() => {
+          /* Add delete logic here */
+          console.log(bookmark, '<deleting todo impl');
+        }}
+      >
+        Delete
+      </AlertDialogAction>
+    </DeleteBookmarkConfirmationDialog>
   );
 }
