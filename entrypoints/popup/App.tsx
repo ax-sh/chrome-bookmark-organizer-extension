@@ -58,14 +58,14 @@ function App() {
       {Object.entries(groupedBookmarks).map(([domain, value]) => {
         return (
           <article key={domain} className='prose w-[700px] py-8'>
-            <div className='bg-white prose'>
-              <h3 className='text-xl text-black px-4'>
-                {domain} [{value.length}]
-              </h3>
-            </div>
-            <div className='prose bg-white overflow-hidden'>
-              <BookmarksTable data={value} />
-            </div>
+            <details>
+              <summary className='bg-white prose text-xl text-black p-2 cursor-pointer'>
+                [{value.length}] {domain}
+              </summary>
+              <div className='prose bg-white overflow-hidden'>
+                <BookmarksTable data={value} />
+              </div>
+            </details>
           </article>
         );
       })}

@@ -6,6 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { DATASET } from 'linkedom/types/shared/symbols';
+import { DateTime } from 'luxon';
 
 const columnHelper = createColumnHelper<BM>();
 
@@ -24,12 +26,15 @@ const columns = [
     ),
     header: () => <span>Title</span>,
   }),
-  columnHelper.accessor('url', {
-    cell: (info) => (
-      <a href={info.getValue()} target='_blank' rel='noopener noreferrer'>
-        {info.getValue()}
-      </a>
-    ),
+  columnHelper.accessor('dateAdded', {
+    cell: (info) => {
+      const unix = info.getValue<number>();
+      const pastTime = DateTime.fromMillis(unix);
+      const now = DateTime.now();
+      const elapsed = now.diff(pastTime, ['days', 'hours', 'minutes', 'seconds']);
+      return <time title={`[${unix}]`}>{elapsed.toHuman()}</time>;
+    },
+
     header: () => <span>URL</span>,
   }),
 ];
