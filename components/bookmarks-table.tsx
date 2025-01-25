@@ -1,5 +1,6 @@
 import { BM } from '@/entrypoints/utils';
 import {
+  SortingState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -11,7 +12,13 @@ const columnHelper = createColumnHelper<BM>();
 const columns = [
   columnHelper.accessor('title', {
     cell: (info) => (
-      <a href={info.cell.row.original.url} target='_blank' rel='noopener noreferrer'>
+      <a
+        title={info.getValue()}
+        className='block w-100 overflow-hidden text-ellipsis'
+        href={info.cell.row.original.url}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         {info.getValue()}
       </a>
     ),
@@ -28,21 +35,26 @@ const columns = [
 ];
 
 const BookmarksTable = ({ data }: { data: BM[] }) => {
+  const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
   });
 
   return (
-    <table className='w-full divide-y divide-gray-200'>
+    <table className='w-full divide-gray-200'>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
               <th
                 key={header.id}
-                className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                className='h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]'
               >
                 {header.isPlaceholder
                   ? null
@@ -52,11 +64,17 @@ const BookmarksTable = ({ data }: { data: BM[] }) => {
           </tr>
         ))}
       </thead>
-      <tbody className='bg-white divide-y divide-gray-200'>
+      <tbody className='[&_tr:last-child]:border-0'>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
+          <tr
+            key={row.id}
+            className='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'
+          >
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className='px-6 py-4 whitespace-nowrap'>
+              <td
+                key={cell.id}
+                className='p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]'
+              >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
