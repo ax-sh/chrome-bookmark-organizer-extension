@@ -2,7 +2,7 @@ import reactLogo from '@/assets/react.svg';
 import BookmarksTable from '@/components/bookmarks-table';
 import { Button } from '@/components/ui/button.tsx';
 import { type BM, fetchFilteredBookmarks, groupUrlsByDomain } from '@/entrypoints/utils';
-import { ComponentRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
 
