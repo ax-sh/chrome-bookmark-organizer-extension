@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite';
+import path from 'node:path';
 import { type UserManifest, defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
@@ -15,6 +16,11 @@ export default defineConfig({
   },
   vite: () => ({
     plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
     // Override config here, same as `defineConfig({ ... })`
     // inside vite.config.ts files
   }),
