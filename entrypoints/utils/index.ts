@@ -2,7 +2,7 @@ export type BM = Pick<
   chrome.bookmarks.BookmarkTreeNode,
   'id' | 'url' | 'title' | 'dateAdded' | 'parentId'
 >;
-
+// @see https://developer.chrome.com/docs/extensions/reference/api/bookmarks
 export function traverseBookmarks(node: chrome.bookmarks.BookmarkTreeNode): BM[] {
   let urls: BM[] = [];
 
