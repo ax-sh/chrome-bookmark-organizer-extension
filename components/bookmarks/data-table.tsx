@@ -1,5 +1,4 @@
-'use client';
-
+import { Button } from '@/components/ui/button.tsx';
 import {
   Table,
   TableBody,
@@ -9,7 +8,22 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { BM } from '@/entrypoints/utils';
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@radix-ui/react-dropdown-menu';
+import {
+  ColumnDef,
+  SortingState,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import { MoreHorizontal } from 'lucide-react';
 import { DateTime } from 'luxon';
 
 interface DataTableProps<TData, TValue> {
@@ -18,10 +32,15 @@ interface DataTableProps<TData, TValue> {
 }
 
 function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   return (
@@ -98,6 +117,32 @@ export const columns: ColumnDef<BM>[] = [
     ),
 
     header: () => <div>Title</div>,
+  },
+  {
+    id: 'actions',
+    enableHiding: false,
+    cell: ({ row }) => {
+      const bookmark = row.original;
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='ghost' className='h-8 w-8 p-0'>
+              <span className='sr-only'>Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end' className={'bg-white'}>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(bookmark.url!)}>
+              Copy Url
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
   },
 ];
 
