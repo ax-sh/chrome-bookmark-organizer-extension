@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import wxtLogo from '/wxt.svg';
 
-function SearchInput(props: { value: string; onChange: (e) => void }) {
+function SearchInput(props: { value: string; onChange: (e: string) => void }) {
   return (
     <input
       type='search'
