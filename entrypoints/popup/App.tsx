@@ -49,22 +49,21 @@ function App() {
       </div>
 
       {/* <BookmarksTable data={bookmarks} /> */}
-      <pre>
-        {Object.entries(groupedBookmarks).map(([domain, value]) => {
-          return (
-            <article key={domain} className='prose w-[700px] py-8'>
-              <div className='bg-white prose'>
-                <h3 className='text-xl text-black px-4'>
-                  {domain} [{value.length}]
-                </h3>
-              </div>
-              <div className='prose bg-white overflow-hidden'>
-                <BookmarksTable data={value} />
-              </div>
-            </article>
-          );
-        })}
-      </pre>
+
+      {Object.entries(groupedBookmarks).map(([domain, value]) => {
+        return (
+          <article key={domain} className='prose w-[700px] py-8'>
+            <div className='bg-white prose'>
+              <h3 className='text-xl text-black px-4'>
+                {domain} [{value.length}]
+              </h3>
+            </div>
+            <div className='prose bg-white overflow-hidden'>
+              <BookmarksTable data={value} />
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
 }
