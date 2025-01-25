@@ -40,7 +40,14 @@ export async function fetchFilteredBookmarks(domain: string) {
 }
 
 export function groupUrlsByDomain(allUrls: BM[]) {
-  return Object.groupBy(allUrls, (bookmark) => {
+  const sortByField = <T extends keyof BM>(field: T, order: 'asc' | 'desc') => (a: BM, b: BM) => {
+    const aValue = a[field] ?? 0;
+    const bValue = b[field] ?? 0;
+    return order === 'desc' ? Number(bValue) - Number(aValue) : Number(aValue) - Number(bValue);
+  };
+
+  const sortedUrls = allUrls.toSorted(sortByField('dateAdded', 'asc'));
+  return Object.groupBy(sortedUrls, (bookmark) => {
     try {
       const domain = new URL(bookmark.url!).hostname;
       return domain;
@@ -48,7 +55,7 @@ export function groupUrlsByDomain(allUrls: BM[]) {
       console.error('Error parsing URL:', bookmark.url, error);
       return '';
     }
-  });
+  }) as Record<string, BM[]>;
   // const groupedByDomain = allUrls.reduce(
   //   (acc, bookmark) => {
   //     try {

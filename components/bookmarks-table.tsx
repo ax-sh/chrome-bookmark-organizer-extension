@@ -6,7 +6,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { DATASET } from 'linkedom/types/shared/symbols';
 import { DateTime } from 'luxon';
 
 const columnHelper = createColumnHelper<BM>();
