@@ -136,7 +136,7 @@ export const columns: ColumnDef<BM>[] = [
       const unix = row.getValue<number>('dateAdded'); //only works if its defined in this column
       return (
         <>
-          <ElapsedTime unix={unix} />;
+          <ElapsedTime unix={unix} args={['seconds']} />;
           <a
             title={bookmark.title}
             className='block w-100 overflow-hidden text-ellipsis'
