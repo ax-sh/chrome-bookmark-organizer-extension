@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge.tsx';
 import { BM } from '@/entrypoints/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function ShowBookmarkBadges({ bookmark }: { bookmark: BM }) {
   const [parent, setParent] = useState<string>('');
