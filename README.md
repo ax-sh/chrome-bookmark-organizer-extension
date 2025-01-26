@@ -53,14 +53,43 @@ The built extension will be available in the `.output/chrome-mv3` directory.
   - Hot module reloading for faster development
   - TypeScript support out of the box
 - [React](https://reactjs.org/) - UI Library
+
   - Component-based architecture
   - Efficient state management with hooks
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS Framework
-  - Modern and responsive design
-  - Customizable components
+
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
   - Enhanced code reliability
   - Better development experience with type checking
+
+## UI Components and Styling
+
+- [shadcn/ui](https://ui.shadcn.com/) - Re-usable Components
+
+  - Built on top of Radix UI and Tailwind CSS
+  - Beautifully designed components
+  - Copy and paste components
+  - Fully customizable and maintainable
+  - Used components:
+    - Button
+    - Input
+    - Table
+    - Dialog
+    - Badge
+
+- [Tailwind CSS](https://tailwindcss.com/) (v4) - Utility-first CSS Framework
+
+  - Modern and responsive design
+  - Highly customizable components
+  - Built-in animations and transitions
+  - JIT (Just-In-Time) compilation
+
+- [Radix UI](https://www.radix-ui.com/) - Headless UI Components
+  - Accessible components out of the box
+  - Highly customizable primitives
+  - Used components:
+    - Alert Dialog
+    - Dropdown Menu
+    - Slot
 
 ## Permissions
 
