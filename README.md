@@ -1,6 +1,6 @@
 # Chrome Bookmark Organizer Extension
 
-A prototype bookmark organizer built with WXT, React, and Tailwind CSS.
+A powerful Chrome extension that helps you organize and manage your bookmarks efficiently. Built with WXT, React, and Tailwind CSS, it provides an intuitive interface for searching, filtering, and managing your Chrome bookmarks.
 
 ## Project Links
 
@@ -10,9 +10,16 @@ A prototype bookmark organizer built with WXT, React, and Tailwind CSS.
 
 ## Features
 
-- Organize bookmarks by domain
-- Search and filter bookmarks
-- Display bookmark details (title, URL, date added)
+- **Domain-based Organization**: Automatically groups bookmarks by their domain names
+- **Smart Search**: Filter bookmarks by domain name or URL patterns
+- **Collapsible Views**: Each domain group can be expanded/collapsed for better organization
+- **Bookmark Statistics**: Shows the total number of bookmarks and count per domain
+- **Modern UI**: Clean and responsive interface built with Tailwind CSS
+- **Detailed Information**: Displays comprehensive bookmark details including:
+  - Title and URL
+  - Date added
+  - Parent folder location
+  - Quick actions for bookmark management
 
 ## Development
 
@@ -42,6 +49,27 @@ The built extension will be available in the `.output/chrome-mv3` directory.
 ## Tech Stack
 
 - [WXT](https://wxt.dev/) - Web Extension Framework
+  - Provides modern tooling and development experience
+  - Hot module reloading for faster development
+  - TypeScript support out of the box
 - [React](https://reactjs.org/) - UI Library
+  - Component-based architecture
+  - Efficient state management with hooks
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS Framework
+  - Modern and responsive design
+  - Customizable components
 - [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+  - Enhanced code reliability
+  - Better development experience with type checking
+
+## Permissions
+
+The extension requires the following Chrome permissions:
+
+- `bookmarks`: To access and manage Chrome bookmarks
+- `storage`: For storing extension preferences
+- `tabs`: For interacting with browser tabs
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
