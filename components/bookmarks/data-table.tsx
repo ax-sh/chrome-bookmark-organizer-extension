@@ -48,7 +48,7 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
 
   return (
     <div className='rounded-md border'>
-      <Table>
+      <Table className={'table-auto'}>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -58,7 +58,7 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()} // Toggle sorting
                   >
-                    <Button variant={'ghost'} className={'flex gap-2 cursor-pointer'}>
+                    <Button variant={'ghost'} className={'flex gap-1 cursor-pointer p-0 m-0'}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
@@ -69,10 +69,6 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
                       }[header.column.getIsSorted() as string] ?? (
                         <ArrowUpDown className='h-4 w-4' />
                       )}
-                      {/*{{*/}
-                      {/*  asc: ' 🔼',*/}
-                      {/*  desc: ' 🔽',*/}
-                      {/*}[header.column.getIsSorted() as string] ?? null}{' '}*/}
                     </Button>
                   </TableHead>
                 );
@@ -106,7 +102,7 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
 
 export const columns: ColumnDef<BM>[] = [
   {
-    id: 'tags',
+    id: 'Folder',
     // accessorKey: 'tags',
     enableHiding: false,
     accessorFn: (row) => row.parentId ?? '', // Explicitly define the value to sort by
@@ -125,10 +121,6 @@ export const columns: ColumnDef<BM>[] = [
       return <ElapsedTime unix={unix} />;
     },
   },
-  // {
-  //   accessorKey: 'title',
-  //   enableHiding: true,
-  // },
   {
     accessorKey: 'url',
     cell: ({ row, getValue }) => {
@@ -139,12 +131,12 @@ export const columns: ColumnDef<BM>[] = [
           <ElapsedTime unix={unix} args={['seconds']} />;
           <a
             title={bookmark.title}
-            className='block w-100 overflow-hidden text-ellipsis'
+            className='block w-100 overflow-hidden text-ellipsis text-sm'
             href={getValue<string>()}
             target='_blank'
             rel='noopener noreferrer'
           >
-            {bookmark.title.trim() ?? getValue<string>()}
+            {bookmark.title.trim() || getValue<string>()}
           </a>
         </>
       );
