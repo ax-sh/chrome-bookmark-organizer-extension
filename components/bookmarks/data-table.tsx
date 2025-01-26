@@ -54,10 +54,20 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  <TableHead
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()} // Toggle sorting
+                  >
+                    <Button variant={'ghost'} className={'flex gap-2 cursor-pointer'}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                      {/* Sorting indicator */}
+                      {{
+                        asc: ' 🔼',
+                        desc: ' 🔽',
+                      }[header.column.getIsSorted() as string] ?? null}{' '}
+                    </Button>
                   </TableHead>
                 );
               })}
@@ -91,13 +101,17 @@ function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValu
 export const columns: ColumnDef<BM>[] = [
   {
     id: 'tags',
+    // accessorKey: 'tags',
     enableHiding: false,
+    accessorFn: (row) => row.parentId ?? '', // Explicitly define the value to sort by
+    enableSorting: true,
     cell: ({ row }) => {
       const bookmark = row.original;
       return <ShowBookmarkBadges bookmark={bookmark} />;
     },
   },
   {
+    enableSorting: true,
     accessorKey: 'dateAdded',
     header: () => <span>Time</span>,
     cell: (info) => {
