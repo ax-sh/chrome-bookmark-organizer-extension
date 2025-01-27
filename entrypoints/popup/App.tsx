@@ -29,28 +29,28 @@ function SearchInput({ value, onChange }: SearchInputProps) {
 }
 
 function App() {
-  const [bookmarks, setBookmarks] = useState<BM[]>([]);
   const [searchTerm, setSearchTerm] = useState('amazon');
   const [groupedBookmarks, setGroupedBookmarks] = useState<{ [key: string]: BM[] }>({});
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     fetchFilteredBookmarks(searchTerm).then((filtered) => {
       console.log('Filtered URLs:', filtered);
       const grouped = groupUrlsByDomain(filtered);
       setGroupedBookmarks(grouped);
-
-      setBookmarks(filtered);
+      console.log(filtered.length, 'DDDSS');
+      setCount(filtered.length);
     });
   }, [searchTerm]);
 
   return (
     <div className='text-black w-full min-w-[600px]'>
       <section className='flex items-center justify-between p-4'>
-        <img alt='' src={reactLogo} className='w-12' />
+        <img alt='' src={reactLogo} className='w-8' />
         <Button variant='outline' className='rounded h-[unset]'>
-          <img alt='' src={wxtLogo} className='w-12' />
+          <img alt='' src={wxtLogo} className='object-fill' />
+          <h1 className='text-3xl'>{count}</h1>
         </Button>
-        <h1 className='text-3xl text-white'>{bookmarks.length}</h1>
       </section>
       <div className='flex flex-col p-4'>
         <SearchInput value={searchTerm} onChange={setSearchTerm} />
