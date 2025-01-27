@@ -46,10 +46,9 @@ function App() {
   return (
     <div className='text-black w-full min-w-[600px]'>
       <section className='flex items-center justify-between p-4'>
-        <img alt='' src={wxtLogo} className='w-12' />
         <img alt='' src={reactLogo} className='w-12' />
-        <Button variant='outline' className='rounded'>
-          Button
+        <Button variant='outline' className='rounded h-[unset]'>
+          <img alt='' src={wxtLogo} className='w-12' />
         </Button>
         <h1 className='text-3xl text-white'>{bookmarks.length}</h1>
       </section>
