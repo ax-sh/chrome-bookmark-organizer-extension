@@ -4,7 +4,6 @@ import { type UserManifest, defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: 'chrome',
   modules: ['@wxt-dev/module-react'],
   manifest: ({ browser, manifestVersion, mode, command }) => {
     const config: UserManifest = {
@@ -24,7 +23,7 @@ export default defineConfig({
     // Override config here, same as `defineConfig({ ... })`
     // inside vite.config.ts files
   }),
-  runner: {
+  webExt: {
     // chromiumArgs: ['--user-data-dir=./.wxt/chrome-data'],
     openDevtools: true,
     openConsole: true,
