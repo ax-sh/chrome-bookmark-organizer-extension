@@ -1,6 +1,8 @@
 # Chrome Bookmark Organizer Extension
 
-A powerful Chrome extension that helps you organize and manage your bookmarks efficiently. Built with WXT, React, and Tailwind CSS, it provides an intuitive interface for searching, filtering, and managing your Chrome bookmarks.
+A powerful Chrome extension that helps you organize and manage your bookmarks
+efficiently. Built with WXT, React, and Tailwind CSS, it provides an intuitive
+interface for searching, filtering, and managing your Chrome bookmarks.
 
 ## Project Links
 
@@ -10,10 +12,13 @@ A powerful Chrome extension that helps you organize and manage your bookmarks ef
 
 ## Features
 
-- **Domain-based Organization**: Automatically groups bookmarks by their domain names
+- **Domain-based Organization**: Automatically groups bookmarks by their domain
+  names
 - **Smart Search**: Filter bookmarks by domain name or URL patterns
-- **Collapsible Views**: Each domain group can be expanded/collapsed for better organization
-- **Bookmark Statistics**: Shows the total number of bookmarks and count per domain
+- **Collapsible Views**: Each domain group can be expanded/collapsed for better
+  organization
+- **Bookmark Statistics**: Shows the total number of bookmarks and count per
+  domain
 - **Modern UI**: Clean and responsive interface built with Tailwind CSS
 - **Detailed Information**: Displays comprehensive bookmark details including:
   - Title and URL

@@ -1,14 +1,14 @@
-import { clsx } from 'clsx';
-import { DateTime } from 'luxon';
-import { DurationUnits } from 'luxon';
+import { clsx } from "clsx";
+import { DateTime } from "luxon";
+import { DurationUnits } from "luxon";
 
 export function ElapsedTime({
   unix,
   className,
   args = [
-    'years',
-    'days',
-    'hours',
+    "years",
+    "days",
+    "hours",
     // 'minutes'
   ],
 }: {
@@ -20,7 +20,7 @@ export function ElapsedTime({
   const now = DateTime.now();
   const elapsed = now.diff(pastTime, args);
   return (
-    <time className={clsx('text-[0.5rem]', className)} title={`[${unix}]`}>
+    <time className={clsx("text-[0.5rem]", className)} title={`[${unix}]`}>
       {elapsed.toHuman()} ago
     </time>
   );

@@ -1,9 +1,11 @@
 export type BM = Pick<
   chrome.bookmarks.BookmarkTreeNode,
-  'id' | 'url' | 'title' | 'dateAdded' | 'parentId'
+  "id" | "url" | "title" | "dateAdded" | "parentId"
 >;
 // @see https://developer.chrome.com/docs/extensions/reference/api/bookmarks
-export function traverseBookmarks(node: chrome.bookmarks.BookmarkTreeNode): BM[] {
+export function traverseBookmarks(
+  node: chrome.bookmarks.BookmarkTreeNode,
+): BM[] {
   let urls: BM[] = [];
 
   if (node.url) {
@@ -35,9 +37,9 @@ export async function readBookmarks() {
 const compareValues = <T>(
   a: T | null | undefined,
   b: T | null | undefined,
-  order: 'asc' | 'desc'
+  order: "asc" | "desc",
 ) => {
-  const direction = order === 'desc' ? -1 : 1;
+  const direction = order === "desc" ? -1 : 1;
 
   // Handle nullish values
   if (a == null && b == null) return 0;
@@ -79,7 +81,7 @@ export async function fetchFilteredBookmarks(domain: string) {
     try {
       return i.url && new URL(i.url).origin.includes(domain);
     } catch (error) {
-      console.error('Error parsing URL:', i.url, error);
+      console.error("Error parsing URL:", i.url, error);
       return false;
     }
   });
@@ -88,25 +90,28 @@ export async function fetchFilteredBookmarks(domain: string) {
 
 export function groupUrlsByDomain(allUrls: BM[]) {
   const sortByField =
-    <T extends keyof BM>(field: T, order: 'asc' | 'desc') =>
-    (a: BM, b: BM) => {
+    <T extends keyof BM>(field: T, order: "asc" | "desc") => (a: BM, b: BM) => {
       const aValue = a[field] ?? 0;
       const bValue = b[field] ?? 0;
-      return order === 'desc' ? Number(bValue) - Number(aValue) : Number(aValue) - Number(bValue);
+      return order === "desc"
+        ? Number(bValue) - Number(aValue)
+        : Number(aValue) - Number(bValue);
     };
 
-  const sortedUrls = allUrls.toSorted(sortByField('dateAdded', 'asc'));
+  const sortedUrls = allUrls.toSorted(sortByField("dateAdded", "asc"));
   const grouped = Object.groupBy(sortedUrls, (bookmark) => {
     try {
       const domain = new URL(bookmark.url!).hostname;
       return domain;
     } catch (error) {
-      console.error('Error parsing URL:', bookmark.url, error);
-      return '';
+      console.error("Error parsing URL:", bookmark.url, error);
+      return "";
     }
   }) as Record<string, BM[]>;
 
-  return Object.fromEntries(Object.entries(grouped).sort(([, a], [, b]) => b.length - a.length));
+  return Object.fromEntries(
+    Object.entries(grouped).sort(([, a], [, b]) => b.length - a.length),
+  );
   // const groupedByDomain = allUrls.reduce(
   //   (acc, bookmark) => {
   //     try {
@@ -122,4 +127,9 @@ export function groupUrlsByDomain(allUrls: BM[]) {
   // );
   // return groupedByDomain;
 }
-export default { traverseBookmarks, readBookmarks, fetchFilteredBookmarks, groupUrlsByDomain };
+export default {
+  traverseBookmarks,
+  readBookmarks,
+  fetchFilteredBookmarks,
+  groupUrlsByDomain,
+};

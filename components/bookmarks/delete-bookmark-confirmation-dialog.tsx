@@ -8,17 +8,19 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog.tsx';
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu.tsx';
-import { BM } from '@/entrypoints/utils';
-import { PropsWithChildren } from 'react';
+} from "@/components/ui/alert-dialog.tsx";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu.tsx";
+import { BM } from "@/entrypoints/utils";
+import { PropsWithChildren } from "react";
 
-export function DeleteBookmarkConfirmationDialog({ children }: PropsWithChildren) {
+export function DeleteBookmarkConfirmationDialog(
+  { children }: PropsWithChildren,
+) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem
-          className='cursor-pointer text-red-600 focus:bg-red-100'
+          className="cursor-pointer text-red-600 focus:bg-red-100"
           onSelect={(e) => e.preventDefault()}
         >
           Delete bookmark
@@ -28,7 +30,8 @@ export function DeleteBookmarkConfirmationDialog({ children }: PropsWithChildren
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the bookmark.
+            This action cannot be undone. This will permanently delete the
+            bookmark.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>{children}</AlertDialogFooter>
@@ -37,15 +40,17 @@ export function DeleteBookmarkConfirmationDialog({ children }: PropsWithChildren
   );
 }
 
-export function DeleteBookmarkConfirmationDialogWithAction({ bookmark }: { bookmark: BM }) {
+export function DeleteBookmarkConfirmationDialogWithAction(
+  { bookmark }: { bookmark: BM },
+) {
   return (
     <DeleteBookmarkConfirmationDialog>
       <AlertDialogCancel>Cancel</AlertDialogCancel>
       <AlertDialogAction
-        className={'bg-red-500 cursor-pointer'}
+        className={"bg-red-500 cursor-pointer"}
         onClick={() => {
           /* Add delete logic here */
-          console.log(bookmark, '<deleting todo impl');
+          console.log(bookmark, "<deleting todo impl");
         }}
       >
         Delete
